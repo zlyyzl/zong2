@@ -1,26 +1,20 @@
-pip>=24.3.1
-setuptools>=62.0.0
+setuptools
 
-scikit-learn
+scikit-learn==0.23.2
 
-Cython==0.29.14
+openpyxl==2.5.6
 
-openpyxl
+streamlit==1.23.1
 
-streamlit
+pandas==1.5.3
 
-pandas
+joblib==1.4.2
 
-joblib
-
-pyLDAvis
+pyLDAvis==3.2.2
 
 pycaret
 
-numba
+numba==0.54.1
 
-numpy
+numpy==1.20.3
 
-shap
-
-matplotlib
