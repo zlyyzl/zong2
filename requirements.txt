@@ -1,6 +1,6 @@
-setuptools==68.0.0
+setuptools
 
-scikit-learn==0.23.2
+scikit-learn==1.0.2
 
 openpyxl==2.5.6
 
@@ -12,10 +12,12 @@ joblib==1.4.2
 
 pyLDAvis==3.2.2
 
-pycaret==2.3.10
+pycaret
 
 numba==0.54.1
 
 numpy==1.20.3
+
+shap==0.40.0
 
 matplotlib==3.5.3
