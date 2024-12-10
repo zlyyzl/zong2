@@ -4,7 +4,7 @@ scikit-learn
 
 openpyxl
 
-streamlit
+streamlit==1.23.1
 
 pandas
 
