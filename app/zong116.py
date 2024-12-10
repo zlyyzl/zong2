@@ -1,10 +1,11 @@
+
 import streamlit as st
 import pandas as pd
 import base64
+import matplotlib.pyplot as plt
 import sqlite3
 import hashlib
 from PIL import Image
-import matplotlib.pyplot as plt
 import pickle
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import brier_score_loss, accuracy_score, recall_score, precision_score, f1_score, roc_auc_score, roc_curve
@@ -266,24 +267,27 @@ def prediction_page():
                 st.pyplot(plt) 
             st.write("This section will handle preoperative batch predictions.Please click on the link to download the form and fill in the corresponding data. After that, click on the Browse files button to upload file for prediciton, you can see the prediction of the classifier at the bottom. This page supports batch prediction of the outcome of multiple patients at one time, and can predict the outcome of patients with missing values.")
 
-            csv_exporter=openpyxl.Workbook()
-            sheet=csv_exporter.active
-            sheet.cell(row=1,column=1).value='NIHSS'
-            sheet.cell(row=1,column=2).value='GCS'
-            sheet.cell(row=1,column=3).value='pre_eGFR'
-            sheet.cell(row=1,column=4).value='pre_glucose'
-            sheet.cell(row=1,column=5).value='PC_ASPECTS'
-            sheet.cell(row=1,column=6).value='Age'
-            sheet.cell(row=1,column=7).value='pre_BUN'
-            csv_exporter.save('for predictions.csv')
+            csv_exporter = openpyxl.Workbook()
+            sheet = csv_exporter.active
+            sheet.cell(row=1, column=1).value = 'NIHSS'
+            sheet.cell(row=1, column=2).value = 'GCS'
+            sheet.cell(row=1, column=3).value = 'pre_eGFR'
+            sheet.cell(row=1, column=4).value = 'pre_glucose'
+            sheet.cell(row=1, column=5).value = 'PC_ASPECTS'
+            sheet.cell(row=1, column=6).value = 'Age'
+            sheet.cell(row=1, column=7).value = 'pre_BUN'
+            csv_file_name = 'for_predictions.csv'
+            csv_exporter.save(csv_file_name)
+            if os.path.exists(csv_file_name):
+                data = open(csv_file_name, 'rb').read()
+                b64 = base64.b64encode(data).decode('UTF-8')
+                href = f'<a href="data:file/csv;base64,{b64}" download="{csv_file_name}">Download csv file</a>'
+                st.markdown(href, unsafe_allow_html=True)
+            else:
+                 st.error(f"文件 '{csv_file_name}' 找不到，请检查文件生成的过程。")
+            csv_exporter.close()
 
-            data = open('for_predictions.csv', 'rb').read() 
-            b64 = base64.b64encode(data).decode('UTF-8') 
-            href = f'<a href="data:file/data;base64,{b64}" download="for_predictions.csv">Download csv file</a>'
-            st.markdown(href, unsafe_allow_html=True) 
-            csv_exporter.close() 
-
-            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"]) 
+            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"])
 
             if file_upload is not None: 
                 try: 
@@ -446,24 +450,27 @@ def prediction_page():
                 plt.grid() 
                 st.pyplot(plt) 
 
-            csv_exporter=openpyxl.Workbook()
-            sheet=csv_exporter.active
+            csv_exporter = openpyxl.Workbook()
+            sheet = csv_exporter.active
             sheet.cell(row=1,column=1).value='NIHSS'
             sheet.cell(row=1,column=2).value='GCS'
             sheet.cell(row=1,column=3).value='pre_eGFR'
             sheet.cell(row=1,column=4).value='PC_ASPECTS'
             sheet.cell(row=1,column=5).value='Age'
             sheet.cell(row=1,column=6).value='pre_BUN'
-            sheet.cell(row=1,column=7).value='procedural time'          
-            csv_exporter.save('for predictions.csv')
+            sheet.cell(row=1,column=7).value='procedural time'   
+            csv_file_name = 'for_predictions.csv'
+            csv_exporter.save(csv_file_name)
+            if os.path.exists(csv_file_name):
+                data = open(csv_file_name, 'rb').read()
+                b64 = base64.b64encode(data).decode('UTF-8')
+                href = f'<a href="data:file/csv;base64,{b64}" download="{csv_file_name}">Download csv file</a>'
+                st.markdown(href, unsafe_allow_html=True)
+            else:
+                 st.error(f"文件 '{csv_file_name}' 找不到，请检查文件生成的过程。")
+            csv_exporter.close()
 
-            data = open('for_predictions.csv', 'rb').read() 
-            b64 = base64.b64encode(data).decode('UTF-8') 
-            href = f'<a href="data:file/data;base64,{b64}" download="for_predictions.csv">Download csv file</a>'
-            st.markdown(href, unsafe_allow_html=True) 
-            csv_exporter.close() 
-
-            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"]) 
+            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"])
 
             if file_upload is not None: 
                 try: 
@@ -621,24 +628,26 @@ def prediction_page():
                 plt.grid() 
                 st.pyplot(plt) 
 
-            csv_exporter = openpyxl.Workbook() 
-            sheet = csv_exporter.active 
+            csv_exporter = openpyxl.Workbook()
+            sheet = csv_exporter.active
             sheet.cell(row=1, column=1).value = 'Age'
             sheet.cell(row=1, column=2).value = 'GCS' 
             sheet.cell(row=1, column=3).value = 'PC_ASPECTS' 
             sheet.cell(row=1, column=4).value = 'procedural time' 
             sheet.cell(row=1, column=5).value = 'post_eGFR' 
-            sheet.cell(row=1, column=6).value = 'post_NIHSS'      
-            
-            csv_exporter.save('for_predictions.csv') 
+            sheet.cell(row=1, column=6).value = 'post_NIHSS'     
+            csv_file_name = 'for_predictions.csv'
+            csv_exporter.save(csv_file_name)
+            if os.path.exists(csv_file_name):
+                data = open(csv_file_name, 'rb').read()
+                b64 = base64.b64encode(data).decode('UTF-8')
+                href = f'<a href="data:file/csv;base64,{b64}" download="{csv_file_name}">Download csv file</a>'
+                st.markdown(href, unsafe_allow_html=True)
+            else:
+                 st.error(f"文件 '{csv_file_name}' 找不到，请检查文件生成的过程。")
+            csv_exporter.close()
 
-            data = open('for_predictions.csv', 'rb').read() 
-            b64 = base64.b64encode(data).decode('UTF-8') 
-            href = f'<a href="data:file/data;base64,{b64}" download="for_predictions.csv">Download csv file</a>'
-            st.markdown(href, unsafe_allow_html=True) 
-            csv_exporter.close() 
-
-            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"]) 
+            file_upload = st.file_uploader("Upload CSV file for predictions", type=["csv"])
 
             if file_upload is not None: 
                 try: 
