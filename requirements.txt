@@ -1,23 +1,23 @@
 setuptools
 
-scikit-learn==1.0.2
+scikit-learn
 
-openpyxl==2.5.6
+openpyxl
 
-streamlit==1.23.1
+streamlit
 
-pandas==1.5.3
+pandas
 
-joblib==1.4.2
+joblib
 
-pyLDAvis==3.2.2
+pyLDAvis
 
 pycaret
 
-numba==0.54.1
+numba
 
-numpy==1.20.3
+numpy
 
-shap==0.40.0
+shap
 
-matplotlib==3.5.3
+matplotlib
