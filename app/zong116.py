@@ -4,6 +4,7 @@ import base64
 import sqlite3
 import hashlib
 from PIL import Image
+import matplotlib.pyplot as plt
 import pickle
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import brier_score_loss, accuracy_score, recall_score, precision_score, f1_score, roc_auc_score, roc_curve
