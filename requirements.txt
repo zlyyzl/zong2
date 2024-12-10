@@ -2,6 +2,8 @@ setuptools
 
 scikit-learn
 
+Cython==0.29.14
+
 openpyxl
 
 streamlit
